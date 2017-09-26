@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='css/bootstrap.min.css') }}">
+    <link rel= "stylesheet" href= "{{url_for('static',filename='css/bootstrap-theme.min.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='style.css') }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+  
+    <nav id="myNavbar" class="navbar navbar-default navbar-inverse navbar-static-top" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="container">
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand">PPE Tracker v0.1</a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+
+      </div>
+    </nav>  
+
+    <div class="container">
+
+    
+    <form action="{{ url_for('main')}}" method="post">
+
+      <div class="form-group">
+      <label for="exampleFormControlSelect1">Zone</label>
+      <select class="form-control" id="exampleFormControlSelect1">
+        <option>Carbon Dioxide Storage Room</option>
+        <option>Welding Area</option>
+        <option>TNT Manufacturing Floor</option>
+        <option>Jet Engine Testing Zone</option>
+      </select>
+        </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="user1" class="col-form-label">Person Name</label>
+            <select class="form-control" id="user1">
+              <option>None</option>
+              <option>John Smith</option>
+              <option>Jane Doe</option>
+              <option>Peter Foo</option>
+              <option>Bob Bar</option>
+              <option>Alice Cooper</option>
+            </select>          
+        </div>
+        <div class="form-group col-md-6">
+          <label for="PPE1" class="col-form-label">PPE Equipment</label>
+            <select class="form-control" id="PPE1">
+              <option>None</option>
+              <option>Helmet</option>
+              <option>Vest</option>
+              <option>Respirator</option>
+              <option>Co2 Detector</option>
+              <option>Goggles</option>
+            </select>  
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="user2" class="col-form-label">Person Name</label>
+            <select class="form-control" id="user2">
+              <option>None</option>
+              <option>John Smith</option>
+              <option>Jane Doe</option>
+              <option>Peter Foo</option>
+              <option>Bob Bar</option>
+              <option>Alice Cooper</option>
+            </select>          
+        </div>
+        <div class="form-group col-md-6">
+          <label for="PPE2" class="col-form-label">PPE Equipment</label>
+            <select class="form-control" id="PPE2">
+              <option>None</option>
+              <option>Helmet</option>
+              <option>Vest</option>
+              <option>Respirator</option>
+              <option>Co2 Detector</option>
+              <option>Goggles</option>
+            </select>  
+        </div>
+      </div>
+
+      <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
+
+    </div>
+    <script src="{{url_for('static',filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{url_for('static',filename='js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{url_for('static',filename='js/myscript.js') }}"></script>
+  </body>
+</html>

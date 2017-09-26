@@ -1,0 +1,1266 @@
+{'_id': ObjectId('59c3266552e2fa4c44493929'),
+ 'notifications': [{'apMacAddress': '00:2b:01:00:04:00',
+                    'associated': True,
+                    'band': 'IEEE_802_11_B',
+                    'confidenceFactor': 56.0,
+                    'deviceId': '00:00:2a:01:00:16',
+                    'entity': 'WIRELESS_CLIENTS',
+                    'eventId': 38936104,
+                    'floorId': 723413320329068590,
+                    'floorRefId': None,
+                    'geoCoordinate': {'latitude': 36.12574274331201,
+                                      'longitude': -97.06647440935994,
+                                      'unit': 'DEGREES'},
+                    'ipAddress': ['10.10.20.181'],
+                    'lastSeen': '2017-09-21T03:39:31.696+0100',
+                    'locationCoordinate': {'unit': 'FEET',
+                                           'x': 145.80875,
+                                           'y': 42.993862,
+                                           'z': 0.0},
+                    'locationMapHierarchy': 'DevNetCampus>DevNetBuilding>DevNetZone',
+                    'moveDistanceInFt': 22.859222,
+                    'notificationType': 'movement',
+                    'ssid': 'test',
+                    'subscriptionName': 'MovementClient',
+                    'timestamp': 1505961571696,
+                    'username': ''}]}
+
+
+{'notifications': [{'notificationType': 'movement', 'subscriptionName': 'MovementClient', 'eventId': 12304230, 'locationMapHierarchy': 'DevNetCampus>DevNetBuilding>DevNetZone>Zone3', 'locationCoordinate': {'x': 120.14392, 'y': 41.257206, 'z': 0.0, 'unit': 'FEET'}, 'geoCoordinate': {'latitude': 36.12574750599209, 'longitude': -97.06656182699703, 'unit': 'DEGREES'}, 'confidenceFactor': 40.0, 'apMacAddress': '00:2b:01:00:04:00', 'associated': True, 'username': '', 'ipAddress': ['10.10.20.181'], 'ssid': 'test', 'band': 'IEEE_802_11_B', 'floorId': 723413320329068590, 'floorRefId': None, 'entity': 'WIRELESS_CLIENTS', 'deviceId': '00:00:2a:01:00:16', 'lastSeen': '2017-09-20T07:51:51.687+0100', 'moveDistanceInFt': 119.23543, 'timestamp': 1505890311687}]}
+
+[
+    {
+        "name": "random",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.distance > 20"
+                    },
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8011",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "DcTest",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": []
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://149.202.183.66:2307",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": false,
+        "enableMacScrambling": false,
+        "macScramblingSalt": "Test",
+        "notificationType": "LocationUpdate"
+    },
+    {
+        "name": "Movement",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.deviceType == client"
+                    },
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding"
+                    },
+                    {
+                        "condition": "movement.distance > 20"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8000",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "Jeff_movement",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.distance > 20"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8063",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "learning",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "MPM_Notifications",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    },
+                    {
+                        "condition": "movement.distance > 20"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8050",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "Rickie",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.distance > 20"
+                    },
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8012",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "learning",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "My Test Notification",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.distance > 10.0"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8043",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": false,
+        "enableMacScrambling": false,
+        "macScramblingSalt": "",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "CharsTest",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.deviceType == client"
+                    },
+                    {
+                        "condition": "movement.distance > 15.0"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8043",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": false,
+        "enableMacScrambling": false,
+        "macScramblingSalt": "",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "ab_movement",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    },
+                    {
+                        "condition": "movement.distance > 20"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8042",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "random_2",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.distance > 20"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    },
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8000",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "test1",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.distance > 1"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://127.0.0.1:8000",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": false,
+        "macScramblingSalt": "",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "bp-movement",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding"
+                    },
+                    {
+                        "condition": "movement.distance > 20"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8020",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "lindt_movement",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": []
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8920",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Chokepoint"
+    },
+    {
+        "name": "new_notif_sg_1",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.distance > 20"
+                    },
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8032",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "Alert1-PS",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.distance > 20"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    },
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8052",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "brad_movement",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.distance > 20"
+                    },
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8041",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "simon_test1",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    },
+                    {
+                        "condition": "movement.distance > 20"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8052",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "Jeremy Test",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.distance > 50"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8064",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "conduce-condition",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "locationupdate.macAddressList == 11:22:33:44:55:66;66:55:44:33:22:11;"
+                    },
+                    {
+                        "condition": "locationupdate.deviceType == client"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://104.186.0.46:80",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "toto",
+        "notificationType": "LocationUpdate"
+    },
+    {
+        "name": "ACC",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "areachange.buildingChange == true"
+                    },
+                    {
+                        "condition": "areachange.floorChange == true"
+                    },
+                    {
+                        "condition": "areachange.campusChange == true"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://136.62.21.198:8080/Thingworx/Things/LocationService/Services/LocationUpdate?appKey=11ac8dbc-30ae-4cd4-8115-e3b4f5ff768a&x-thingworx-session=true",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": false,
+        "macScramblingSalt": "",
+        "notificationType": "AreaChange"
+    },
+    {
+        "name": "PH_Movement",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    },
+                    {
+                        "condition": "movement.distance > 10"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8033",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "AJF TEST",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.deviceType == client"
+                    },
+                    {
+                        "condition": "movement.distance > 20"
+                    },
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8040",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "new_notif_sg",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.deviceType == client"
+                    },
+                    {
+                        "condition": "movement.distance > 20"
+                    },
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8032",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "Notification Test",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    },
+                    {
+                        "condition": "movement.distance > 20"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8030",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "learning",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "test",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": []
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8920",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "learning",
+        "notificationType": "Chokepoint"
+    },
+    {
+        "name": "BMM_Movement",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.hierarchy == CiscoCampus"
+                    },
+                    {
+                        "condition": "movement.distance > 20"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8013",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "MovementTest",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.deviceType == client"
+                    },
+                    {
+                        "condition": "movement.distance > 5"
+                    },
+                    {
+                        "condition": "movement.macAddressList == 00:2b:01:00:07:00;"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://a97de397.ngrok.io:80",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "cisco123",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "MPM_PUT",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.distance > 20"
+                    },
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8050",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "MovementClient",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.distance > 2"
+                    },
+                    {
+                        "condition": "movement.macAddressList == 00:00:2a:01:00:16;"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://a97de397.ngrok.io:80/location",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": false,
+        "macScramblingSalt": "",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "AH_Movement",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    },
+                    {
+                        "condition": "movement.distance > 20"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8053",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "mjf_movement",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.deviceType == client"
+                    },
+                    {
+                        "condition": "movement.distance > 20"
+                    },
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8023",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "test",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "simon_test",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    },
+                    {
+                        "condition": "movement.distance > 20"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8052",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "Mitch-R",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.deviceType == client"
+                    },
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    },
+                    {
+                        "condition": "movement.distance > 20"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8070",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "TEST_AW_Notification",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.distance > 1"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8031",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "learning",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "pjw-notification",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    },
+                    {
+                        "condition": "movement.distance > 50"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8010",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    },
+    {
+        "name": "MR-Notify",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    },
+                    {
+                        "condition": "movement.deviceType == client"
+                    },
+                    {
+                        "condition": "movement.distance > 20"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://128.107.70.29:8920",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": true,
+        "macScramblingSalt": "listening",
+        "notificationType": "Movement"
+    }
+]
+
+
+
+
+{
+        "name": "MovementClient7",
+        "userId": "learning",
+        "rules": [
+            {
+                "conditions": [
+                    {
+                        "condition": "movement.distance > 2"
+                    },
+                    {
+                        "condition": "movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone"
+                    },
+                    {
+                        "condition": "movement.macAddressList == 00:00:2a:01:00:40;"
+                    }
+                ]
+            }
+        ],
+        "subscribers": [
+            {
+                "receivers": [
+                    {
+                        "uri": "http://http://d64da400.ngrok.io:80/location",
+                        "messageFormat": "JSON",
+                        "qos": "AT_MOST_ONCE"
+                    }
+                ]
+            }
+        ],
+        "enabled": true,
+        "enableMacScrambling": false,
+        "macScramblingSalt": "",
+        "notificationType": "Movement"
+    }
+
+
+
+
+{
+    'name': 'notename', 
+    'userId': 'learning', 
+    'rules': [
+        {
+            'conditions': [
+                {
+                    'condition': 'movement.distance > 2'
+                }, 
+                {
+                    'condition': 'movement.hierarchy == DevNetCampus>DevNetBuilding>DevNetZone'
+                }, 
+                {
+                    'condition': 'movement.macAddressList == 00:00:2a:01:00:40;'
+                }
+            ]
+        }
+    ], 
+    'subscribers': [
+        {
+            'receivers': [
+                {
+                    'uri': 'http://d64da400.ngrok.io:80/location', 
+                    'messageFormat': 'JSON', 
+                    'qos': 'AT_MOST_ONCE'
+                }
+            ]
+        }
+    ], 
+    'notificationType': 'Movement'
+}
+
+
+
+
+{"name": "MovementClient", "userId": "learning", "rules": [{"conditions": [{"condition": "movement.distance > 2"}, {"condition": "movement.hierarchy == DevNetCampus/DevNetBuilding/DevNetZone/Test2"}, {"condition": "movement.macAddressList == 00:00:2a:01:00:40;"}]}], "subscribers": [{"receivers": [{"uri": "http://a97de397.ngrok.io/location", "messageFormat": "JSON", "qos": "AT_MOST_ONCE"}]}], "enabled": true, "enableMacScrambling": false, "macScramblingSalt": "", "notificationType": "Movement"}
+

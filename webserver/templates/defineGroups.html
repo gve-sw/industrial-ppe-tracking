@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='css/bootstrap.min.css') }}">
+    <link rel= "stylesheet" href= "{{url_for('static',filename='css/bootstrap-theme.min.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='style.css') }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+
+  	 <nav id="myNavbar" class="navbar navbar-default navbar-inverse navbar-static-top" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="container">
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand">PPE Tracker v0.1</a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+
+      </div>
+    </nav>  
+
+
+
+  	<div class="containter">
+
+  	<form method="post">
+	    {{ form.hidden_tag() }}
+	    <div class="form-group">
+	    	<label for="zone">Zone</label>
+	    	{{ form.zone(class_="form-control", id_="zone") }}
+	    </div>
+	    <div class="form-row">
+	    	<div class="form-group col-md-6">
+	    		<label for="user1">Employee</label>
+	    		{{ form.user1(class_="form-control", id_="user1") }}
+	    	</div>
+	    	<div class="form-group col-md-6">
+	    		<label for="ppe1">Equipment</label>
+	    		{{ form.ppe1(class_="form-control", id_="ppe1") }}
+	    	</div>	
+	    </div>
+
+	    <div class="form-row">
+	    	<div class="form-group col-md-6">
+	    		<label for="user2">Employee</label>
+	    		{{ form.user2(class_="form-control", id_="user2") }}
+	    	</div>
+	    	<div class="form-group col-md-6">
+	    		<label for="ppe2">Equipment</label>
+	    		{{ form.ppe2(class_="form-control", id_="ppe2") }}
+	    	</div>	
+	    </div>
+	    
+	    
+	    <button type="submit" class="btn btn-primary">Submit</button>
+	    <!--<input type="submit">-->
+	</form>
+
+	</div>
+
+    <script src="{{url_for('static',filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{url_for('static',filename='js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{url_for('static',filename='js/myscript.js') }}"></script>
+
+
+  </body>
+</html>
+
+

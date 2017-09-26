@@ -1,3 +1,5 @@
 Flask==0.12.2
 requests==2.18.4
-Flask-WTF
+Flask-WTF==0.14.2
+WTForms==2.1
+pymongo==3.5.1
