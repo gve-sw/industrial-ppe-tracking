@@ -7,7 +7,7 @@ import pymongo
 from pymongo import MongoClient
 import settings
 
-#Requirement for WTForms
+#Requirement for WTForms. Only used for dev. 
 SECRET_KEY = 'development'
 
 #location of MongoDB
