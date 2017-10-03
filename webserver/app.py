@@ -69,8 +69,8 @@ def createNotification(zone, macAddress):
                 ]
             }
         ],
-        "enabled": true,
-        "enableMacScrambling": false,
+        "enabled": True,
+        "enableMacScrambling": False,
         "macScramblingSalt": "",
         "notificationType": "Movement"
     }
@@ -78,8 +78,11 @@ def createNotification(zone, macAddress):
     cmxJSON = json.dumps(cmxData)
 
     try:
+        print ('Im about to do something')
+
         response = requests.request("PUT" , "http://cmxlocationsandbox.cisco.com/api/config/v1/notification" , auth=('learning','learning') , data = cmxJSON , verify=False )
         status_code = response.status_code
+        print (status_code)
         if (status_code == 201):
             return 'OK'
         else:
@@ -152,7 +155,7 @@ def defineGroups():
 def listener():
 	#Load data coming from CMX, insert it into MongoDB
     data = json.loads(request.data)
-	locationTable.insert_one(data)
+    locationTable.insert_one(data)
 
     #Grab the tracking policy from Mongo
     personCheck = groupsTable.find_one()
@@ -165,7 +168,7 @@ def listener():
         print (ppeCoordinates)
         print (data[0]['mapCoordinate'])
 
-	return 'OK'
+    return 'OK'
 
 
 if __name__ == '__main__':

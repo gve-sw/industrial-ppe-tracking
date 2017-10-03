@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='css/bootstrap.min.css') }}">
-    <link rel= "stylesheet" href= "{{url_for('static',filename='css/bootstrap-theme.min.css') }}">
-    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='style.css') }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='css/bootstrap.min.css') }}">
+    <link rel= "stylesheet" href= "{{url_for('static',filename='css/bootstrap-theme.min.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='style.css') }}">
+
   </head>
   <body>
 
@@ -28,13 +30,25 @@
 
 
 
-  	<div class="containter">
 
+
+
+  	<div class="container">
+
+    <div class="help-block">
+    	
+    </div>
+
+  	
+  	
   	<form method="post">
 	    {{ form.hidden_tag() }}
-	    <div class="form-group">
+	    
+	    <div class="form-row">
+	    	<div class="form-group col-md-12">
 	    	<label for="zone">Zone</label>
 	    	{{ form.zone(class_="form-control", id_="zone") }}
+	    	</div>
 	    </div>
 	    <div class="form-row">
 	    	<div class="form-group col-md-6">
@@ -58,10 +72,17 @@
 	    	</div>	
 	    </div>
 	    
-	    
-	    <button type="submit" class="btn btn-primary">Submit</button>
+
+	    <div class="form-row">
+	    	<div class="form-group col-md-12">
+	    		<button type="submit" class="btn btn-primary">Submit</button>
+	    	</div>
 	    <!--<input type="submit">-->
+		</div>
 	</form>
+
+
+	
 
 	</div>
 
