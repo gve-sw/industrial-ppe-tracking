@@ -24,7 +24,13 @@ Flask is used to serve the Operations webpage, where operations staff can define
 Flask also serves as a listener for events pushed from CMX. 
 MongoDB keeps a record of all the defined policies.
 
-Once a policy has been defined by the Operations team, it is sent to CMX in the form of a notification definition. Notifications are used by CMX to PUSH data to applications when certain events occur. 
+Once a policy has been defined by the Operations team, it is sent to CMX in the form of a notification definition. Notifications are used by CMX to PUSH data back to the application only when the predefined conditions are fulfilled. 
 
-The application defines a User A and a Zone B, and that it is interested in Movement data. When CMX sees User A in Zone B, it will fire a notification to the application as a POST message. 
-The Flask application listens for POST messages 
+
+### Environment
+This WIP implementation uses the CMX Location Sandbox for test data. 
+Ngrok is used to give CMX a destination for notifications. Note that the Ngrok tunnel address will be different every time you load Ngrok and must be input in the webserver/settings.py file.
+
+The other applications are containerised and the container environment is managed by Docker Compose. Ensure you have Docker and Compose installed, and '''docker-compose up''' can be used to bring up the environment.
+
+
