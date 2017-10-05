@@ -1,3 +1,7 @@
-# Tracking industrial employees and their PPE with CMX
+# Using the WiFi to reduce risk in industrial envinronments
+
+
+
+#### Problem
 
 More to come
