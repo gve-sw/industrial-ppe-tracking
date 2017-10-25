@@ -1,0 +1,9 @@
+region: au
+tunnels:
+  adminSite:
+    addr: 172.30.0.10:80
+    proto: http
+  listener:
+    addr: 172.30.0.15:29171
+    proto: http
+web_addr: 0.0.0.0:4040

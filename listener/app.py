@@ -5,25 +5,21 @@ import requests
 import json
 import pymongo
 from pymongo import MongoClient
-import string
-import random
-
-
+import settings
 
 #Requirement for WTForms. Only used for dev. 
 SECRET_KEY = 'development'
 
+#location of MongoDB
+mongoAddr = settings.mongoAddr
 
-#location of MongoDB using Docker hostnames. Only valid in Compose
-mongoAddr = "database:27017"
-
-
-
-
+#Address of ngrok tunnel for Dev. Used as destination for CMX notifications
+ngrokTunnel = settings.ngrokTunnel
 
 #initialise the MongoDB tables
 client = MongoClient(mongoAddr)
 locationDB = client.locationDB
+locationTable = locationDB.locationTable
 groupsTable = locationDB.groupsTable
 
 #Find out what zones are predefined in CMX. Will be used to populate Web form
@@ -41,30 +37,23 @@ mac5 = '00:00:2a:01:00:09'
 mac6 = '00:00:2a:01:00:0a'
 
 
-
-
 #Function to create a push service from CMX. 
-def createNotification(name, zone, macAddress):
+def createNotification(zone, macAddress):
     #Data for creating notification. Note at the moment getting error from CMX - further troubleshooting required
-    
-
     cmxData = {
-        "name": name,
+        "name": "MovementClient",
         "userId": "learning",
         "rules": [
             {
                 "conditions": [
                     {
-                        "condition": "inout.deviceType == client"
+                        "condition": "movement.distance > 2"
                     },
                     {
-                        "condition": "inout.in/out == in"
+                        "condition": "movement.hierarchy == " + zone
                     },
                     {
-                        "condition": "inout.hierarchy == " + zone
-                    },
-                    {
-                        "condition": "inout.macAddressList == "+macAddress+";"
+                        "condition": "movement.macAddressList == "+macAddress+";"
                     }
                 ]
             }
@@ -82,23 +71,20 @@ def createNotification(name, zone, macAddress):
         ],
         "enabled": True,
         "enableMacScrambling": False,
-        "notificationType": "InOut"
+        "macScramblingSalt": "",
+        "notificationType": "Movement"
     }
-
-
 
     cmxJSON = json.dumps(cmxData)
 
-    print (cmxJSON)
-
     try:
-        #print ('Im about to do something')
-        header = {'content-type': 'application/json', 'accept': 'application/json'}
-        response = requests.request("PUT" , "https://cmxlocationsandbox.cisco.com/api/config/v1/notification" , auth=('learning','learning') , headers = header, data = cmxJSON , verify=False )
+        print ('Im about to do something')
+
+        response = requests.request("PUT" , "http://cmxlocationsandbox.cisco.com/api/config/v1/notification" , auth=('learning','learning') , data = cmxJSON , verify=False )
         status_code = response.status_code
         print (status_code)
         if (status_code == 201):
-            return name
+            return 'OK'
         else:
             response.raise_for_status()
             print("Error occured in POST -->"+(response.text))
@@ -107,34 +93,22 @@ def createNotification(name, zone, macAddress):
     finally:
         if response : response.close()
 
-def findNgrok():
-    header = {'content-type' : "application/json"}
-    url = "http://172.30.0.30:4040/api/tunnels"
+# Used to get location of any tracked client from CMX using Mac Address
+def GetLocation(macAddress):
     try:
-        response = requests.request("GET", url, headers=header, verify=False)
+        response = requests.request("GET" , "http://cmxlocationsandbox.cisco.com/api/location/v2/clients?macAddress="+macAddress , auth=('learning','learning'), verify=False )
         status_code = response.status_code
-        if (status_code == 200):
-            return json.loads(response.text)
+        if (status_code == 201):
+            clientJSON = response.text
+            clientDetail = json.loads(clientJSON)
+            return clientDetail
         else:
             response.raise_for_status()
-            print("Error occured in GET -->"+(response.text))
+            print("Error occured in POST -->"+(response.text))
     except requests.exceptions.HTTPError as err:
         print ("Error in connection -->"+str(err))
     finally:
         if response : response.close()
-
-
-#Address of ngrok tunnel for Dev. Used as destination for CMX notifications
-ngrokRaw = findNgrok()
-#print (ngrokRaw)
-for tun in ngrokRaw['tunnels']:
-    #print (tun['name'])
-    if tun['name'] == 'listener (http)':
-        ngrokTunnel = tun['public_url'] + ':80/location'
-        #print (ngrokTunnel)
-        break
-    else:
-        print ('Ngrok tunnel not created')
 
 
 # Flask App provides Web form for Admins to define the tracking policy, is also a listener for notifications from CMX
@@ -163,25 +137,39 @@ def defineGroups():
 
         #Zone data from CMX must be transformed to be used for queries.
         zoneFormat = (form.zone.data).replace('/','>')
-        
-        name = "InOutNotifier" + ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))
-
         #Define the datatype that will populate MongoDB and define the tracking policy
-        data = {'zone': zoneFormat , 'user1' : form.user1.data , 'ppe1' : form.ppe1.data, 'user2' : form.user2.data , 'ppe2' : form.ppe2.data, 'name' : name, 'destinationURL' : ngrokTunnel}
-        
-        
+        data = {'zone': zoneFormat , 'user1' : form.user1.data , 'ppe1' : form.ppe1.data, 'user2' : form.user2.data , 'ppe2' : form.ppe2.data}
         #For Dev environment - only allow one definition at a time.
         #Before allowing a new definition, delete all others. 
         groupsTable.delete_many({})
         groupsTable.insert_one(data)
         #Create a CMX notification for movements on the user in the specified zone
-        createNotification(name, zoneFormat , form.user1.data)
-        response = requests.request("POST" , "http://cmxsim:80/inout" , data="")
+        createNotification(zoneFormat , form.user1.data)
     else:
         print (form.errors)
     return render_template('defineGroups.html',form=form)
 
-#more
+
+#/location is used as the listener for notifications generated by CMX
+@app.route('/location',methods=['POST'])
+def listener():
+	#Load data coming from CMX, insert it into MongoDB
+    data = json.loads(request.data)
+    locationTable.insert_one(data)
+
+    #Grab the tracking policy from Mongo
+    personCheck = groupsTable.find_one()
+    #Check the tracking data coming in against the first person defined in policy
+    if data['macAddress'] == personCheck['user1']:
+        #If there was a match for the person, ask CMX about the location of the first PPE
+        ppeDetail = GetLocation(data['macAddress'])
+        ppeCoordinates = clientDetail[0]['mapCoordinate']
+        #Print both sets of coordinates. In future our tracking logic will go here
+        print (ppeCoordinates)
+        print (data[0]['mapCoordinate'])
+
+    return 'OK'
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)

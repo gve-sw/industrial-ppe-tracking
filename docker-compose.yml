@@ -12,6 +12,19 @@ services:
       app-network:
         ipv4_address: 172.30.0.10
     container_name: webserver
+    depends_on:
+      - ngrok
+
+  listener:
+      build: ./listener
+      volumes:
+        - ./listener:/usr/src/app
+      ports:
+        - "29171:29171"
+      networks:
+        app-network:
+          ipv4_address: 172.30.0.15
+      container_name: listener
 
   database:
     image: mongo
@@ -22,6 +35,26 @@ services:
         ipv4_address: 172.30.0.20
     container_name: database
 
+  ngrok:
+    build: ./ngrok
+    ports:
+      - "32776:4040"
+      - "32778:80"
+    networks:
+      app-network:
+        ipv4_address: 172.30.0.30
+    container_name: ngrok
+
+  cmxsim:
+    build: ./CMXSimulator
+    volumes:
+      - ./CMXSimulator:/usr/src/app
+    ports:
+      - "32780:80"
+    networks:
+      app-network:
+        ipv4_address: 172.30.0.40
+    container_name: cmxsim
 
 networks:
   app-network:
