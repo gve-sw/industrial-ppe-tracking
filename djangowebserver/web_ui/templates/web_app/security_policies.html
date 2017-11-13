@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="section">
+        <div class="panel panel--loose panel--bordered">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-huge text-blue base-margin-bottom">Personnel security policies</h1>
+
+                    <hr>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-group__text select">
+                            <select name="area" id="area" ng-model="policy.area">
+                                <option value="Area 1">Area 1</option>
+                                <option value="Area 2">Area 2</option>
+                                <option value="Area 3">Area 3</option>
+                            </select>
+                            <label for="area">Area</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group__text">
+                            <input id="employee" ng-model="policy.employee.username">
+                            <label for="employee">Employee</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-group__text select">
+                            <select multiple name="equipment" id="equipment" ng-model="policy.equipment">
+                                <option value="Helmet">Helmet</option>
+                                <option value="Vest">Vest</option>
+                                <option value="Goggles">Goggles</option>
+                            </select>
+                            <label for="equipment">Equipment</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+                <div class="col-md-12" ng-show="!policy.id">
+                    <hr/>
+                    <button class="btn btn--primary" ng-click="sendPolicy()">Save</button>
+                </div>
+                <div class="col-md-12" ng-show="policy.id">
+                    <hr/>
+                    <button class="btn btn--primary" ng-click="sendPolicy()">Update</button>
+                    <button class="btn btn--negative" ng-click="deletePolicy()">Delete</button>
+                    <button class="btn btn--secondary" ng-click="clearPolicy()">New</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="panel panel--loose panel--bordered">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-huge text-blue base-margin-bottom">Current Policies</h1>
+
+                    <hr>
+                    <div class="responsive-table">
+                        <table class="table table--bordered table--hover">
+                            <thead>
+                            <tr>
+                                <th>Employee
+                                </th>
+                                <th>Area</th>
+                                <th>Equipment</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr style="cursor:pointer" ng-repeat="policy in policies" ng-click="editPolicy(policy)">
+                                <td>{a policy.employee.username a}</td>
+                                <td>{a policy.area a}</td>
+                                <td>
+                                    <div ng-repeat="equipment in policy.equipment">
+                                        {a equipment a}
+                                        <br/>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
